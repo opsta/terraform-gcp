@@ -1,7 +1,10 @@
 # GKE cluster
 resource "google_container_cluster" "primary" {
-  name     = var.cluster_name != "" ? var.cluster_name : "${var.project_id}-default" 
-  location = var.region
+  # If not specific name default is ${var.project_id}-default
+  name = var.cluster_name != "" ? var.cluster_name : "${var.project_id}-default"
+
+  # Specific zone to disable multi zone cluster
+  location = join("-", [var.region, var.zone == "" ? "" : "${var.zone}"])
 
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -22,7 +25,7 @@ resource "google_container_cluster" "primary" {
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
   name       = "${google_container_cluster.primary.name}-node-pool"
-  location   = var.region
+  location   = google_container_cluster.primary.location
   cluster    = google_container_cluster.primary.name
   node_count = var.node_count
 
