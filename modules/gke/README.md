@@ -46,7 +46,7 @@ provider "google" {
 }
 
 module "gke" {
-  source = "github.com/opsta/terraform-gcp//modules/gke"
+  source = "github.com/opsta/terraform-gcp//modules/gke?ref=master"
 
   project_id   = var.project_id     // project id on GCP
   region       = var.region         // region to provision GKE
