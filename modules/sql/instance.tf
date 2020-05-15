@@ -1,15 +1,43 @@
 # Resources
 resource "google_sql_database_instance" "master" {
   name = var.instance_name
-  # region = var.region
+  # master_instance_name = "${var.instance_name}-master"
 
   # root_password = var.root_password
 
   database_version = format("%s_%s", upper(var.database_type), upper(replace(replace(var.database_version, ".", "_"), " ", "_")))
 
   settings {
-    tier = var.machince_type
+    tier              = var.machince_type
+    availability_type = "ZONAL"
+    disk_size         = 10
+    disk_autoresize   = true
+    disk_type         = "PD_SSD"
+
+    # user_labels = {
+    #   "test" : "test"
+    #   "test1" : "test1"
+    # }
+
+    # dynamic "database_flags" {
+    #   for_each = google_compute_instance.apps
+    #   iterator = apps
+
+    #   content {
+    #     name  = "test"
+    #     value = "test"
+    #   }
+    # }
+
+    backup_configuration {
+      enabled    = true
+      start_time = "00:00"
+    }
   }
+
+  # replica_configuration {
+
+  # }
 }
 
 # Variables
@@ -17,12 +45,6 @@ variable "instance_name" {
   description = "instance name to create in cloud sql"
   type        = string
 }
-
-# variable "region" {
-#   description = "region to create cloud sql"
-#   type        = string
-#   default     = "us-central1"
-# }
 
 variable "database_type" {
   description = "Database type to install. (mysql, postgres, sqlserver)"

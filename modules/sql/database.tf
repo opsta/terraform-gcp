@@ -1,6 +1,6 @@
 # Resources
 resource "google_sql_database" "database" {
-  name     = var.database_name
+  name     = var.database_name != "" ? var.database_name : var.instance_name
   instance = google_sql_database_instance.master.name
 }
 
