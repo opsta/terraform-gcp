@@ -65,7 +65,7 @@ data "template_file" "init" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 data "template_file" "ansible_inventory" {
-  template         = "${file("${path.module}/templates/ansible_inventory.ini")}"
+  template = "${file("${path.module}/templates/ansible_inventory.ini")}"
   vars = {
     instance_group = var.instance_name
     instance_host  = "${var.instance_name}-server ansible_user=${var.ssh_username} ansible_host=${google_compute_instance.instance.network_interface.0.access_config.0.nat_ip} ansible_port=${var.ssh_port}"

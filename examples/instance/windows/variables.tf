@@ -54,7 +54,7 @@ variable "gcp_instance_image" {
   # default     = "centos-cloud/centos-8"
   # default     = "debian-cloud/debian-10"
   # default     = "rhel-cloud/rhel-8"
-  default     = "windows-cloud/windows-2012-r2"
+  default = "windows-cloud/windows-2012-r2"
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
