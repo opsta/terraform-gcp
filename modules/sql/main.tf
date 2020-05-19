@@ -4,5 +4,8 @@ terraform {
     google = {
       version = ">= 3.21.0"
     }
+    random = {
+      version = ">= 2.2.1"
+    }
   }
 }

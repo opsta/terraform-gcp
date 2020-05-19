@@ -1,35 +1,27 @@
 # Resources
-resource "google_sql_database" "database" {
-  name     = var.database_name != "" ? var.database_name : var.instance_name
+resource "google_sql_database" "databases" {
   instance = google_sql_database_instance.master.name
+  count    = length(var.databases)
+
+  name      = var.databases[count.index].name
+  charset   = var.databases[count.index].charset
+  collation = var.databases[count.index].collation
 }
 
 # Variables
-variable "database_name" {
-  description = "Name of database to create (default will use instance name)"
-  type        = string
-  default     = ""
-}
 
-variable "database_charset" {
-  description = "Charset for database"
-  type        = string
-  default     = "utf8"
-}
-
-variable "database_collation" {
-  description = "Collaction for database"
-  type        = string
-  default     = "utf8_general_ci"
+variable "databases" {
+  description = "List of databases to create databases (empty will not created)"
+  type = list(object({
+    name      = string
+    charset   = string
+    collation = string
+  }))
+  default = []
 }
 
 # Outputs
-output "database_link" {
-  description = "link to refer schema in database"
-  value       = google_sql_database.database.self_link
-}
-
-output "database_identifier" {
-  description = "identifier for the resource"
-  value       = google_sql_database.database.id
+output "databases" {
+  description = "All databases information is has status created"
+  value       = google_sql_database.databases
 }

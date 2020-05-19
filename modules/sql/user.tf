@@ -1,28 +1,23 @@
 # Resources
-resource "google_sql_user" "user" {
+resource "random_id" "password" {
+  count       = length(var.users)
+  byte_length = 10
+}
+
+resource "google_sql_user" "users" {
   instance = google_sql_database_instance.master.name
-  host     = var.database_host
-  name     = var.database_user
-  password = var.database_password
+  count    = length(var.users)
+
+  host     = lookup(var.users[count.index], "host", null)
+  name     = lookup(var.users[count.index], "name", null)
+  password = lookup(var.users[count.index], "password", random_id.password[count.index].hex)
 }
 
 # Variables
-variable "database_host" {
-  description = "Host that allow user to connect database. Can be IP address. (only mysql)"
-  type        = string
-  default     = ""
-}
-
-variable "database_user" {
-  description = "Username for database"
-  type        = string
-  default     = "opsta"
-}
-
-variable "database_password" {
-  description = "Password for database"
-  type        = string
-  default     = ""
+variable "users" {
+  description = "List of map(string) (host ,name, password) to create user for connect database (empty will not created)"
+  type        = list(map(string))
+  default     = []
 
   # TODO: check custom validation is experiment feature or not ?
   #   validation {
@@ -32,12 +27,8 @@ variable "database_password" {
 }
 
 # Outputs
-output "username" {
-  value       = google_sql_user.user.name
-  description = "Name to connect database"
+output "users" {
+  value       = [for user in google_sql_user.users : "${user.name}:${user.password}:${user.host}"]
+  description = "all users created for use to connect database"
 }
 
-output "password" {
-  value       = google_sql_user.user.password
-  description = "Password to connect database"
-}
