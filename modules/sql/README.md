@@ -1,4 +1,4 @@
-# GKE module
+# Cloud SQL module
 
 Module for provision Cloud SQL on Google Cloud
 
