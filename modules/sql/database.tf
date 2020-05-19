@@ -3,21 +3,17 @@ resource "google_sql_database" "databases" {
   instance = google_sql_database_instance.master.name
   count    = length(var.databases)
 
-  name      = var.databases[count.index].name
-  charset   = var.databases[count.index].charset
-  collation = var.databases[count.index].collation
+  name      = lookup(var.databases[count.index], "name", null)
+  charset   = lookup(var.databases[count.index], "charset", "utf8")
+  collation = lookup(var.databases[count.index], "collation", "utf8_general_ci")
 }
 
 # Variables
 
 variable "databases" {
   description = "List of databases to create databases (empty will not created)"
-  type = list(object({
-    name      = string
-    charset   = string
-    collation = string
-  }))
-  default = []
+  type        = list(map(string))
+  default     = []
 }
 
 # Outputs

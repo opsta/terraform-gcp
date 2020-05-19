@@ -28,7 +28,7 @@ variable "users" {
 
 # Outputs
 output "users" {
-  value       = [for user in google_sql_user.users : "${user.name}:${user.password}:${user.host}"]
+  value       = [for user in google_sql_user.users : "${user.name}:${user.password}@${user.host}"]
   description = "all users created for use to connect database"
 }
 
