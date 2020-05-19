@@ -5,7 +5,7 @@ resource "google_sql_database_instance" "master" {
   database_version = format("%s_%s", upper(var.database_type), upper(replace(replace(var.database_version, ".", "_"), " ", "_")))
 
   settings {
-    tier              = var.machince_type
+    tier              = var.machine_type
     availability_type = var.availability_type
     disk_size         = var.disk_size
     disk_autoresize   = var.auto_size
@@ -48,7 +48,7 @@ variable "database_version" {
   default     = "5.7"
 }
 
-variable "machince_type" {
+variable "machine_type" {
   description = "Type of instance to provision database"
   type        = string
   default     = "db-f1-micro"
@@ -79,7 +79,7 @@ variable "auto_size" {
 }
 
 variable "availability_type" {
-  description = "This specifies whether a PostgreSQL instance should be set up for high availability (REGIONAL) or single zone (ZONAL)."
+  description = "The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL).'"
   type        = string
   default     = "ZONAL"
 }
