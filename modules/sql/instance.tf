@@ -1,7 +1,7 @@
 # Resources
 resource "google_sql_database_instance" "master" {
   name = var.instance_name
-  # master_instance_name = "${var.instance_name}-master"
+  # master_instance_name = ""
   database_version = format("%s_%s", upper(var.database_type), upper(replace(replace(var.database_version, ".", "_"), " ", "_")))
 
   settings {
@@ -11,22 +11,42 @@ resource "google_sql_database_instance" "master" {
     disk_autoresize   = var.auto_size
     disk_type         = var.disk_type
     activation_policy = var.activation_policy
+    user_labels       = var.labels
 
-    # database_flags = {
-    #   name   = ""
-    #   values = ""
-    # }
-
-    user_labels = var.labels
+    # database_flags      = {}
 
     backup_configuration {
       enabled    = var.backend_enable
       start_time = var.backup_start_time
     }
+
+    # ip_configuration {
+    #   ipv4_enabled        = false
+    #   private_network     = google_compute_network.private_network.self_link
+    #   authorized_networks = []
+    # }
+
+    # maintenance_window {
+    #   day          = 1
+    #   hour         = 0
+    #   update_track = "stable"
+    # }
   }
 
   # replica_configuration {
+  #   ca_certificate     = ""
+  #   client_certificate = ""
+  #   client_key         = ""
 
+  #   connect_retry_interval  = 60
+  #   dump_file_path          = "gs://bucket/filename"
+  #   failover_target         = false
+  #   master_heartbeat_period = 5000
+
+  #   username                  = ""
+  #   password                  = ""
+  #   ssl_cipher                = ""
+  #   verify_server_certificate = false
   # }
 }
 
