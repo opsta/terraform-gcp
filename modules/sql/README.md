@@ -1,6 +1,6 @@
 # GKE module
 
-Module for provision GKE on Google Cloud
+Module for provision Cloud SQL on Google Cloud
 
 ## Requirements
 
