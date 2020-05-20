@@ -50,7 +50,7 @@ variable "gcp_instance_image" {
   description = "GCP boot disk image"
   type        = string
   # Grab name from here https://cloud.google.com/compute/docs/images#os-compute-support
-  default     = "ubuntu-os-cloud/ubuntu-2004-lts"
+  default = "ubuntu-os-cloud/ubuntu-2004-lts"
   # default     = "centos-cloud/centos-8"
   # default     = "debian-cloud/debian-10"
   # default     = "rhel-cloud/rhel-8"

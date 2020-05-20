@@ -44,3 +44,7 @@ variable "machine_type" {
   type        = string
   default     = "n1-standard-1"
 }
+
+/// TODO: Add more variables to support all values of GKE module 
+// preemptible
+// all
