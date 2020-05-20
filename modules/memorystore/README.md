@@ -1,4 +1,4 @@
-# Cloud Memory Store module
+# Cloud Memory Store module (Only Redis for now)
 
 Module for provision Cloud MemoryStore on Google Cloud
 
