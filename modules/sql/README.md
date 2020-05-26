@@ -63,7 +63,7 @@ provider "google" {
 }
 
 module "sql" {
-  source           = "./modules/sql"
+  source           = "github.com/opsta/terraform-gcp//modules/sql?ref=master"
   instance_name    = "test-db"
   database_type    = "mysql"
   database_version = "5.7"
