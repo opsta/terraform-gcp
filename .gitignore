@@ -32,3 +32,6 @@ override.tf.json
 .terraformrc
 terraform.rc
 *.tfvars
+
+# Ignore terragrunt
+**/.terragrunt-cache/*
