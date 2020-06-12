@@ -1,7 +1,8 @@
 # Resources
-resource "random_id" "password" {
-  count       = length(var.users)
-  byte_length = 10
+resource "random_password" "password" {
+  count   = length(var.users)
+  length  = 10
+  special = true
 }
 
 resource "google_sql_user" "users" {
@@ -10,7 +11,7 @@ resource "google_sql_user" "users" {
 
   host     = lookup(var.users[count.index], "host", null)
   name     = lookup(var.users[count.index], "name", null)
-  password = lookup(var.users[count.index], "password", random_id.password[count.index].hex)
+  password = lookup(var.users[count.index], "password", random_password.password[count.index].result)
 }
 
 # Variables
@@ -28,7 +29,7 @@ variable "users" {
 
 # Outputs
 output "users" {
-  value       = [for user in google_sql_user.users : "${user.name}:${user.password}@${user.host}"]
+  value       = [for user in google_sql_user.users : "User: ${user.name} Pass:${user.password} Host: ${user.host}"]
   description = "all users created for use to connect database"
 }
 

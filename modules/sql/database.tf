@@ -9,7 +9,6 @@ resource "google_sql_database" "databases" {
 }
 
 # Variables
-
 variable "databases" {
   description = "List of map(string) (name ,charset, collation) to create databases (empty will not created)"
   type        = list(map(string))

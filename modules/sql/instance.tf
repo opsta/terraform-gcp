@@ -12,7 +12,7 @@ resource "google_sql_database_instance" "master" {
     disk_type         = var.disk_type
     activation_policy = var.activation_policy
     user_labels       = var.labels
-
+  
     # database_flags      = {}
 
     backup_configuration {
