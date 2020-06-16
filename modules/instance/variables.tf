@@ -63,6 +63,12 @@ variable "gcp_instance_network" {
   default     = "default"
 }
 
+variable "gcp_instance_subnetwork" {
+  description = "GCP instance subnetwork"
+  type        = string
+  default     = "default"
+}
+
 variable "gcp_instance_image" {
   description = "GCP boot disk image"
   type        = string
