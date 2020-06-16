@@ -6,12 +6,12 @@ Link to documents by module
 
 - [GKE (Kebernetes)](module/gke)
 
-- [Instance (VM)](repo/blob/master/module/instance)
+- [Instance (VM)](module/instance)
 
-- [Memory Store (Redis)](repo/blob/master/module/instance) \*Memcached is still in beta on GCP. When it release on stable We will update this.
+- [Memory Store (Redis)](module/instance) \*Memcached is still in beta on GCP. When it release on stable We will update this.
 
-- [Cloud SQL (MySQL, Postgres)](repo/blob/master/module/instance)
+- [Cloud SQL (MySQL, Postgres)](module/instance)
 
-- [VPC (Network, and Sub-Network)](repo/blob/master/module/instance)
+- [VPC (Network, and Sub-Network)](module/instance)
 
 - Other is coming soon
