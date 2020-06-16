@@ -25,3 +25,20 @@ resource "google_container_node_pool" "primary_nodes" {
 }
 
 # variables
+variable "node_count" {
+  description = "number of GKE nodes per zone"
+  type        = number
+  default     = 1
+}
+
+variable "machine_type" {
+  description = "type of machine to run as workers"
+  type        = string
+  default     = "n1-standard-1"
+}
+
+variable "preemptible" {
+  description = "Enable preemptible for compute engine"
+  type        = bool
+  default     = false
+}
