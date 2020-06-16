@@ -1,9 +1,10 @@
+# Resources
 resource "google_compute_network" "vpc" {
   name    = var.name
   project = var.project_id
 
   description                     = var.description
-  auto_create_subnetworks         = var.enabled_subnet
+  auto_create_subnetworks         = false
   routing_mode                    = var.routing_mode
   delete_default_routes_on_create = var.delete_default_routes_on_create
 
@@ -14,30 +15,42 @@ resource "google_compute_network" "vpc" {
   }
 }
 
-resource "google_compute_subnetwork" "subnet" {
-  count = var.enabled_subnet == true ? 1 : 0
+# Variables
+variable "routing_mode" {
+  description = "The network-wide routing mode to use. If set to REGIONAL, this network's cloud routers will only advertise routes with subnetworks of this network in the same region as the router. If set to GLOBAL, this network's cloud routers will advertise routes with all subnetworks of this network, across regions."
+  type        = string
+  default     = null
+}
 
-  name    = "${var.cluster_name}-subnet"
-  project = var.project_id
-  region  = var.region
+variable "delete_default_routes_on_create" {
+  description = "If set to true, default routes (0.0.0.0/0) will be deleted immediately after network creation. Defaults to false."
+  type        = bool
+  default     = false
+}
 
-  ip_cidr_range = "10.10.0.0/24"
-  network       = google_compute_network.vpc.name
-  description   = null
+variable "timeout" {
+  description = "Timeout set for create, delete and update resource. Set in format 60s, 5m, 2h"
+  type        = string
+  default     = "4m"
+}
 
-  # purpose = null #beta
-  # role = null #beta
+# Outputs
+output "id" {
+  value       = google_compute_network.vpc.id
+  description = "an identifier for the resource with format projects/{{project}}/global/networks/{{name}}"
+}
 
-  secondary_ip_range {
-    range_name    = "tf-test-secondary-range-update1"
-    ip_cidr_range = "192.168.10.0/24"
-  }
+output "gateway_ipv4" {
+  value       = google_compute_network.vpc.gateway_ipv4
+  description = "The gateway address for default routing out of the network. This value is selected by GCP."
+}
 
-  private_ip_google_access = null
+output "self_link" {
+  value       = google_compute_network.vpc.self_link
+  description = "The URI of the created resource."
+}
 
-  log_config {
-    aggregation_interval = "INTERVAL_5_SEC"
-    flow_sampling        = null
-    metadata             = null
-  }
+output "name" {
+  value       = google_compute_network.vpc.name
+  description = "Name of VPC"
 }
