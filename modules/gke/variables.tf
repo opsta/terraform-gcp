@@ -9,9 +9,3 @@ variable "region" {
   type        = string
   default     = null
 }
-
-variable "auter" {
-  description = "region to create VPC"
-  type        = string
-  default     = null
-}
