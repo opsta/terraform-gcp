@@ -8,10 +8,10 @@ Link to documents by module
 
 - [Instance (VM)](modules/instance)
 
-- [Memory Store (Redis)](modules/instance) \*Memcached is still in beta on GCP. When it release on stable We will update this.
+- [Memory Store (Redis)](modules/memorystore) \*Memcached is still in beta on GCP. When it release on stable We will update this.
 
-- [Cloud SQL (MySQL, Postgres)](modules/instance)
+- [Cloud SQL (MySQL, Postgres)](modules/sql)
 
-- [VPC (Network, and Sub-Network)](modules/instance)
+- [VPC (Network, and Sub-Network)](modules/vpc)
 
 - Other is coming soon
