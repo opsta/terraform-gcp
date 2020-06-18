@@ -1,4 +1,4 @@
-# Cloud SQL module
+# VPC module
 
 Module for provision VPC and subnet on Google Cloud
 
