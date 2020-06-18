@@ -9,16 +9,16 @@ resource "google_container_cluster" "primary" {
 
   addons_config {
     horizontal_pod_autoscaling {
-      disabled = false
+      disabled = ! var.enable_horizontal_pod_autoscaling
     }
     http_load_balancing {
-      disabled = false
+      disabled = ! var.enable_http_load_balancing
     }
     network_policy_config {
-      disabled = true
+      disabled = ! var.enable_network_policy_config
     }
     cloudrun_config {
-      disabled = true
+      disabled = ! var.enable_cloudrun_config
     }
     # TODO: Beta
     # istio_config {
@@ -162,6 +162,30 @@ variable "default_max_pods_per_node" {
   description = "The default maximum number of pods per node in this cluster. This doesn't work on `routes-based` clusters, clusters that don't have IP Aliasing enabled. See the official documentation for more information."
   type        = number
   default     = null
+}
+
+variable "enable_horizontal_pod_autoscaling" {
+  description = "The status of the Horizontal Pod Autoscaling addon, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods. It ensures that a Heapster pod is running in the cluster, which is also used by the Cloud Monitoring service."
+  type        = bool
+  default     = true
+}
+
+variable "enable_http_load_balancing" {
+  description = "The status of the HTTP (L7) load balancing controller addon, which makes it easy to set up HTTP load balancers for services in a cluster."
+  type        = bool
+  default     = true
+}
+
+variable "enable_network_policy_config" {
+  description = "Whether we should enable the network policy addon for the master. This must be enabled in order to enable network policy for the nodes. To enable this, you must also define a network_policy block, otherwise nothing will happen. It can only be disabled if the nodes already do not have network policies enabled."
+  type        = bool
+  default     = false
+}
+
+variable "enable_cloudrun_config" {
+  description = "The status of the CloudRun addon."
+  type        = bool
+  default     = false
 }
 
 variable "enable_binary_authorization" {
