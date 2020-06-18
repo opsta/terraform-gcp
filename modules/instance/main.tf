@@ -31,7 +31,9 @@ resource "google_compute_instance" "instance" {
   }
 
   network_interface {
-    network = var.gcp_instance_network
+    network    = var.gcp_instance_network
+    subnetwork = var.gcp_instance_subnetwork
+
     access_config {
       // Ephemeral IP
     }
