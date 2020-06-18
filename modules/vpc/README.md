@@ -59,7 +59,8 @@ provider "google" {
 module "vpc" {
   source           = "github.com/opsta/terraform-gcp//modules/vpc?ref=master"
 
-  name = "conicle-network"
+  name = "example-network"
+
   enabled_subnet = true
   ip_cidr_range  = "10.10.0.0/24"
 
