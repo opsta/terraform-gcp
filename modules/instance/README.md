@@ -22,6 +22,52 @@ You can find the other parameters in [variables.tf](variables.tf).
 
 Check out the [examples folder](/examples/instance/) for fully-working sample code.
 
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| google | n/a |
+| local | n/a |
+| template | n/a |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| ansible\_inventory\_path | Path where Ansible Inventory is going to generate | `string` | `"./inventories"` | no |
+| gcp\_instance\_boot\_disk\_size | GCP boot disk size | `number` | `60` | no |
+| gcp\_instance\_boot\_disk\_type | GCP boot disk type | `string` | `"pd-standard"` | no |
+| gcp\_instance\_image | GCP boot disk image | `string` | `"ubuntu-os-cloud/ubuntu-2004-lts"` | no |
+| gcp\_instance\_network | GCP instance network | `string` | `"default"` | no |
+| gcp\_instance\_subnetwork | GCP instance subnetwork | `string` | `"default"` | no |
+| gcp\_instance\_tags | list of GCP instance tags | `list` | `[]` | no |
+| gcp\_instance\_type | GCP instance type | `string` | `"n1-standard-2"` | no |
+| gcp\_preemptible | GCP instance preemptible | `bool` | `false` | no |
+| gcp\_zone | The GCP zone in which all resources will be created | `string` | `"asia-southeast1-a"` | no |
+| instance\_name | GCP instance name | `string` | n/a | yes |
+| rdp\_password | RDP Administrator password | `string` | `""` | no |
+| rdp\_username | RDP Administrator username | `string` | `""` | no |
+| ssh\_port | SSH Port | `number` | `22` | no |
+| ssh\_public\_key | Public Key that can be used to SSH to the Instances | `string` | `""` | no |
+| ssh\_username | SSH Username | `string` | `""` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| instance\_name | Instance Name |
+| private\_ip | Instance Private IP |
+| public\_ip | Instance Public IP |
+| rdp\_username | Instance RDP Username |
+| ssh\_port | Instance SSH Port |
+| ssh\_username | Instance SSH Username |
+
 ### SSH access
 
 You can associate an SSH Key with Instances in this cluster by specifying the public key on `ssh_public_key` variable
