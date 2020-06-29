@@ -62,11 +62,11 @@ module "memorystore" {
 
 output "host" {
   value       = module.memorystore.host
-  description = "Host for cloud memory story"
+  description = "Host for cloud memory store"
 }
 
 output "port" {
   value       = module.memorystore.port
-  description = "Port for cloud memory story"
+  description = "Port for cloud memory store"
 }
 ```
