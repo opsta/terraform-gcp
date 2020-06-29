@@ -73,11 +73,6 @@ provider "google" {
 module "gke" {
   source = "github.com/opsta/terraform-gcp//modules/gke?ref=master"
 
-  project_id   = var.project_id     // project id on GCP
-  region       = var.region         // region to provision GKE
-  zone         = "a"                // zone to create cluster, empty for enable multi zone cluster
-  cluster_name = "test-gke"         // cluster name for GKE
-  machine_type = "n1-standard-1"    // instance type for workers
-  node_count   = 2                  // number of nodes per zone for workers, multiply with zone if you specific zone value
+  cluster_name = "test-gke"
 }
 ```
