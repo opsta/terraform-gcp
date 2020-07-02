@@ -40,8 +40,8 @@ variable "gcp_instance_type" {
 }
 
 variable "gcp_instance_tags" {
-  description = "list of GCP instance tags"
-  type        = list
+  description = "A list of network tags to attach to the instance."
+  type        = list(string)
   default     = []
 }
 

@@ -8,14 +8,14 @@ Module for provision Cloud SQL on Google Cloud
 | --------- | --------- |
 | terraform | >= 0.12   |
 | google    | >= 3.21.0 |
-| random    | >= 2.2.1  |
+| random    | >= 2.2.0  |
 
 ## Providers
 
 | Name   | Version   |
 | ------ | --------- |
 | google | >= 3.21.0 |
-| random | >= 2.2.1  |
+| random | >= 2.2.0  |
 
 ## Inputs
 
@@ -23,7 +23,7 @@ Module for provision Cloud SQL on Google Cloud
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------- | :------: |
 | activation_policy | This specifies when the instance should be active. Can be either ALWAYS, NEVER or ON_DEMAND.                                                                                                             | `string`            | `"ALWAYS"`      |    no    |
 | auto_size         | Configuration to increase storage size automatically. Note that future terraform apply calls will attempt to resize the disk to the value specified in disk_size - if this is set, do not set disk_size. | `bool`              | `true`          |    no    |
-| availability_type | This specifies whether a PostgreSQL instance should be set up for high availability (REGIONAL) or single zone (ZONAL).                                                                                   | `string`            | `"ZONAL"`       |    no    |
+| availability_type | The availability type of the Cloud SQL instance, high availability (REGIONAL) or single zone (ZONAL).'                                                                                                   | `string`            | `"ZONAL"`       |    no    |
 | backend_enable    | True if backup configuration is enabled.                                                                                                                                                                 | `bool`              | `true`          |    no    |
 | backup_start_time | HH:MM format time indicating when backup configuration starts.                                                                                                                                           | `string`            | `"00:00"`       |    no    |
 | database_type     | Database type to install. (mysql, postgres, sqlserver)                                                                                                                                                   | `string`            | `"mysql"`       |    no    |
@@ -33,7 +33,7 @@ Module for provision Cloud SQL on Google Cloud
 | disk_type         | The type of data disk: PD_SSD or PD_HDD.                                                                                                                                                                 | `string`            | `"PD_SSD"`      |    no    |
 | instance_name     | instance name to create in cloud sql                                                                                                                                                                     | `string`            | n/a             |   yes    |
 | labels            | A set of key/value user label pairs to assign to the instance.                                                                                                                                           | `map(string)`       | `null`          |    no    |
-| machince_type     | Type of instance to provision database                                                                                                                                                                   | `string`            | `"db-f1-micro"` |    no    |
+| machine_type      | Type of instance to provision database                                                                                                                                                                   | `string`            | `"db-f1-micro"` |    no    |
 | ssl_common_name   | The common name to be used in the certificate to identify the client                                                                                                                                     | `string`            | n/a             |   yes    |
 | users             | List of map(string) (host ,name, password) to create user for connect database (empty will not created)                                                                                                  | `list(map(string))` | `[]`            |    no    |
 
