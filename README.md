@@ -14,4 +14,6 @@ Link to documents by module
 
 - [VPC (Network, and Sub-Network)](modules/vpc)
 
+- [Firewall Rules](modules/firewall)
+
 - Other is coming soon
