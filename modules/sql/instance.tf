@@ -12,7 +12,7 @@ resource "google_sql_database_instance" "master" {
     disk_type         = var.disk_type
     activation_policy = var.activation_policy
     user_labels       = var.labels
-  
+
     # database_flags      = {}
 
     backup_configuration {
@@ -20,11 +20,20 @@ resource "google_sql_database_instance" "master" {
       start_time = var.backup_start_time
     }
 
-    # ip_configuration {
-    #   ipv4_enabled        = false
-    #   private_network     = google_compute_network.private_network.self_link
-    #   authorized_networks = []
-    # }
+    ip_configuration {
+      ipv4_enabled    = var.ipv4_enabled
+      private_network = var.private_network
+      require_ssl     = var.require_ssl
+
+      dynamic "authorized_networks" {
+        for_each = var.authorized_networks
+        content {
+          expiration_time = authorized_networks.value["expiration_time"]
+          name            = authorized_networks.value["name"]
+          value           = authorized_networks.value["value"]
+        }
+      }
+    }
 
     # maintenance_window {
     #   day          = 1
@@ -126,6 +135,34 @@ variable "backend_enable" {
   description = "True if backup configuration is enabled."
   type        = bool
   default     = true
+}
+
+variable "ipv4_enabled" {
+  description = "Whether this Cloud SQL instance should be assigned a public IPV4 address. Either ipv4_enabled must be enabled or a private_network must be configured."
+  type        = bool
+  default     = null
+}
+
+variable "private_network" {
+  description = "The VPC network from which the Cloud SQL instance is accessible for private IP. For example, projects/myProject/global/networks/default. Specifying a network enables private IP. Either ipv4_enabled must be enabled or a private_network must be configured. This setting can be updated, but it cannot be removed after it is set."
+  type        = string
+  default     = null
+}
+
+variable "require_ssl" {
+  description = "True if mysqld should default to REQUIRE X509 for users connecting over IP."
+  type        = bool
+  default     = null
+}
+
+variable "authorized_networks" {
+  description = "List of authorized_networks is object contain 3 value. The first is expiration_time = The RFC 3339 formatted date time string indicating when this whitelist expires. The second is name = A name for this whitelist entry. and The last one is value = A CIDR notation IPv4 or IPv6 address that is allowed to access this instance. Must be set even if other two attributes are not for the whitelist to become active."
+  type = list(object({
+    expiration_time = string
+    name            = string
+    value           = string
+  }))
+  default = []
 }
 
 # Outputs
