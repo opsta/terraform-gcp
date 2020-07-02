@@ -40,3 +40,8 @@ terraform.rc
 
 # document generate by terraform-docs
 **/module-docs.md
+
+inventories
+.terragrunt-cache
+*.json
+/*.tf
