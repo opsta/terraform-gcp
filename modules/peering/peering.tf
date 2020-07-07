@@ -1,6 +1,6 @@
 # resources
 resource "google_compute_network_peering" "peering1" {
-  name                                = var.name + "-1"
+  name                                = join("-", [var.name, "1"])
   network                             = var.network
   peer_network                        = var.peer_network
   export_custom_routes                = var.export_custom_routes
@@ -10,7 +10,7 @@ resource "google_compute_network_peering" "peering1" {
 }
 
 resource "google_compute_network_peering" "peering2" {
-  name                                = var.name + "-2"
+  name                                = join("-", [var.name, "2"])
   network                             = var.peer_network
   peer_network                        = var.network
   export_custom_routes                = var.export_custom_routes
