@@ -27,7 +27,8 @@ variable "name" {
 
 variable "enable_two_way_peering" {
   description = "Use to create peering for both of network."
-  type        = true
+  type        = bool
+  default     = true
 }
 
 variable "network" {
