@@ -1,20 +1,33 @@
 # resources
 resource "google_compute_network_peering" "peering1" {
-  name         = "peering1"
-  network      = google_compute_network.default.id
-  peer_network = google_compute_network.other.id
+  name                                = var.name + "-1"
+  network                             = var.network
+  peer_network                        = var.peer_network
+  export_custom_routes                = var.export_custom_routes
+  import_custom_routes                = var.import_custom_routes
+  export_subnet_routes_with_public_ip = var.export_subnet_routes_with_public_ip
+  import_subnet_routes_with_public_ip = var.import_subnet_routes_with_public_ip
 }
 
 resource "google_compute_network_peering" "peering2" {
-  name         = "peering2"
-  network      = google_compute_network.other.id
-  peer_network = google_compute_network.default.id
+  name                                = var.name + "-2"
+  network                             = var.peer_network
+  peer_network                        = var.network
+  export_custom_routes                = var.export_custom_routes
+  import_custom_routes                = var.import_custom_routes
+  export_subnet_routes_with_public_ip = var.export_subnet_routes_with_public_ip
+  import_subnet_routes_with_public_ip = var.import_subnet_routes_with_public_ip
 }
 
 # variables
 variable "name" {
   description = "Name of the peering."
   type        = string
+}
+
+variable "enable_two_way_peering" {
+  description = "Use to create peering for both of network."
+  type        = true
 }
 
 variable "network" {
@@ -33,7 +46,7 @@ variable "export_custom_routes" {
   default     = false
 }
 
-variable "export_custom_routes" {
+variable "import_custom_routes" {
   description = "Whether to export the custom routes from the peer network."
   type        = bool
   default     = false
