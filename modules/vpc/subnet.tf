@@ -39,7 +39,7 @@ variable "ip_cidr_range" {
 variable "secondary_ip_range" {
   description = "An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. Structure is documented below."
   type = list(object({
-    range_name     = string
+    range_name    = string
     ip_cidr_range = string
   }))
   default = null
@@ -71,26 +71,26 @@ variable "log_meta_data" {
 
 # Outputs
 output "subnet_name" {
-  value       = google_compute_subnetwork.subnet[0].name
+  value       = length(google_compute_subnetwork.subnet) > 0 ? google_compute_subnetwork.subnet[0].name : null
   description = "Name of subnet"
 }
 
 output "subnet_id" {
-  value       = google_compute_subnetwork.subnet[0].id
+  value       = length(google_compute_subnetwork.subnet) > 0 ? google_compute_subnetwork.subnet[0].id : null
   description = "an identifier for the resource with format projects/{{project}}/global/networks/{{name}}"
 }
 
 output "subnet_gateway_address" {
-  value       = google_compute_subnetwork.subnet[0].gateway_address
+  value       = length(google_compute_subnetwork.subnet) > 0 ? google_compute_subnetwork.subnet[0].gateway_address : null
   description = "The gateway address for default routes to reach destination addresses outside this subnetwork."
 }
 
 output "subnet_self_link" {
-  value       = google_compute_subnetwork.subnet[0].self_link
+  value       = length(google_compute_subnetwork.subnet) > 0 ? google_compute_subnetwork.subnet[0].self_link : null
   description = "The URI of the created resource."
 }
 
 output "subnet_creation_timestamp" {
-  value       = google_compute_subnetwork.subnet[0].creation_timestamp
+  value       = length(google_compute_subnetwork.subnet) > 0 ? google_compute_subnetwork.subnet[0].creation_timestamp : null
   description = "Creation timestamp in RFC3339 text format."
 }
