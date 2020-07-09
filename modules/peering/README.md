@@ -1,6 +1,6 @@
-# Network Peering module
+# VPC Network Peering module
 
-Module for create peering on Google Cloud
+Module for create VPC network peering on Google Cloud
 
 ## Requirements
 
