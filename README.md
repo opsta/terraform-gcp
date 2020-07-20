@@ -16,4 +16,10 @@ Link to documents by module
 
 - [Firewall Rules](modules/firewall)
 
+- [VPC Peering](modules/peering)
+
+- [Cloud Router](modules/router)
+
+- [Cloud Nat](modules/nat)
+
 - Other is coming soon
