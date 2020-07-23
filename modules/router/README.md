@@ -38,29 +38,3 @@ Module for create Cloud Router on Google Cloud
 | name | Name of the resource. |
 | self\_link | The URI of the created resource. |
 
-## Example
-
-```terraform
-provider "google" {
-  credentials = jsonencode(var.credentials)
-
-  project = var.project_id
-  region  = var.region
-  zone    = var.zone
-}
-
-module "vpc" {
-  source = ""github.com/opsta/terraform-gcp//modules/vpc?ref=master""
-
-  name           = "test-vpc"
-  enabled_subnet = true
-  ip_cidr_range  = "10.10.0.0/24"
-}
-
-module "router" {
-  source = "github.com/opsta/terraform-gcp//modules/router?ref=master"
-
-  name    = "examaple-router"
-  network = module.vpc.id
-}
-```

@@ -1,31 +1,3 @@
-# resources
-resource "google_compute_router" "router" {
-  name        = var.name
-  network     = var.network
-  description = var.description
-
-  project = var.project_id
-  region  = var.region
-
-  dynamic "bgp" {
-    for_each = var.asn == null ? [] : [{ "key" = "value" }]
-    content {
-      asn               = var.asn
-      advertise_mode    = var.advertise_mode
-      advertised_groups = var.advertised_groups
-
-      dynamic "advertised_ip_ranges" {
-        for_each = var.advertised_ip_ranges
-        content {
-          range       = advertised_ip_ranges.value["range"]
-          description = advertised_ip_ranges.value["description"]
-        }
-      }
-    }
-  }
-}
-
-# variables
 variable "name" {
   description = "Name of the resource. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash."
   type        = string
@@ -79,25 +51,4 @@ variable "advertised_ip_ranges" {
     description = string
   }))
   default = []
-}
-
-# outputs
-output "name" {
-  description = "Name of the resource."
-  value       = var.name
-}
-
-output "id" {
-  description = "an identifier for the resource with format projects/{{project}}/regions/{{region}}/routers/{{name}}"
-  value       = google_compute_router.router.id
-}
-
-output "creation_timestamp" {
-  description = "Creation timestamp in RFC3339 text format."
-  value       = google_compute_router.router.creation_timestamp
-}
-
-output "self_link" {
-  description = "The URI of the created resource."
-  value       = google_compute_router.router.self_link
 }
