@@ -58,10 +58,10 @@ variable "authorized_network" {
   default     = null
 }
 
-variable "conect_mode" {
-  description = "The connection mode of the Redis instance. Possible values are: * DIRECT_PEERING * PRIVATE_SERVICE_ACCESS"
-  type        = string
-  default     = "DIRECT_PEERING"
+variable "is_private" {
+  description = "The connection mode of the Redis instance."
+  type        = bool
+  default     = true
 }
 
 variable "labels" {
