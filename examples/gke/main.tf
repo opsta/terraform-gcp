@@ -3,6 +3,8 @@ module "gke" {
 
   name = "test-gke"
 
+  location = var.zone
+
   cluster_ipv4_cidr = null
 
   #   ip_allocation_policy = {
@@ -15,15 +17,42 @@ module "gke" {
   network    = null
   subnetwork = null
 
-  private_cluster_config = {
-    enable_private_nodes    = true
-    enable_private_endpoint = null
-    master_ipv4_cidr_block  = null
-  }
+  private_cluster_config = null
 
   node_pools = [
     {
-      node_count = 3
+      name               = "example-nodepool"
+      name_prefix        = null
+      location           = null
+      node_locations     = null
+      max_pods_per_node  = null
+      version            = null
+      initial_node_count = null
+      node_count         = 2
+      autoscaling        = null
+      management         = null
+      node_config = {
+        disk_size_gb       = 10
+        disk_type          = "pd-ssd"
+        guest_accelerators = null
+        image_type         = null
+        labels             = null
+        local_ssd_count    = null
+        machine_type       = "n1-standard-1"
+        metadata = {
+          disable-legacy-endpoints = "true"
+        }
+        min_cpu_platform = null
+        oauth_scopes = [
+          "https://www.googleapis.com/auth/logging.write",
+          "https://www.googleapis.com/auth/monitoring"
+        ]
+        preemptible              = false
+        service_account          = null
+        shielded_instance_config = null
+        tags                     = null
+        taint                    = null
+      }
     }
   ]
 }
