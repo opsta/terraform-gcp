@@ -57,28 +57,3 @@ variable "subnets" {
   }))
   default = []
 }
-
-# variable "subnet_default" {
-#   description = "List of subnetwork configurations in VPC (Follow this args reference https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html)"
-#   type = object({
-#     name          = string
-#     ip_cidr_range = string
-#     secondary_ip_range = list(object({
-#       range_name    = string
-#       ip_cidr_range = string
-#     }))
-#     private_ip_google_access = string
-#     log_config = object({
-#       aggregation_interval = string
-#       flow_sampling        = string
-#       meta_data            = string
-#     })
-#   })
-#   default = {
-#     name                     = null
-#     ip_cidr_range            = null
-#     secondary_ip_range       = null
-#     private_ip_google_access = null
-#     log_config               = null
-#   }
-# }

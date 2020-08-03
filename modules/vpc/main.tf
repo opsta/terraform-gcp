@@ -13,12 +13,6 @@ resource "google_compute_network" "vpc" {
     delete = var.timeout
   }
 }
-# FIXME: parse object with default value on missing parameter
-# locals {
-#   subnets = [
-#     for subnet in var.subnets : merge(var.subnet_default, subnet)
-#   ]
-# }
 
 resource "google_compute_subnetwork" "subnets" {
   count = length(var.subnets)
