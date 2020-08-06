@@ -48,7 +48,7 @@ variable "subnets" {
       range_name    = string
       ip_cidr_range = string
     }))
-    private_ip_google_access = string
+    private_ip_google_access = bool
     log_config = object({
       aggregation_interval = string
       flow_sampling        = string
