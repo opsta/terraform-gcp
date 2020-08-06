@@ -24,7 +24,7 @@ module "instance" {
   # to a specific version of the modules, such as the following example:
   # source = "github.com/opsta/terraform-gcp.git//modules/instance?ref=master"
   source             = "../../../modules/instance"
-  public_ip_acess    = false
+  public_ip_access   = false
   instance_name      = var.instance_name
   gcp_instance_type  = var.gcp_instance_type
   gcp_instance_tags  = var.gcp_instance_tags
