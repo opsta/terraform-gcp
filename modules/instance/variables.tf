@@ -75,8 +75,8 @@ variable "gcp_instance_image" {
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }
 
-variable "public_ip_acess" {
-  description = "Enable acess config for instance."
+variable "public_ip_access" {
+  description = "Enable access config for instance."
   type        = bool
   default     = false
 }
