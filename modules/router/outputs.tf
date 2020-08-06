@@ -1,6 +1,6 @@
 output "name" {
   description = "Name of the resource."
-  value       = var.name
+  value       = google_compute_router.router.name
 }
 
 output "id" {

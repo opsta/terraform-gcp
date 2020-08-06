@@ -1,6 +1,6 @@
 output "name" {
   description = "Name of the NAT service."
-  value       = var.name
+  value       = google_compute_router_nat.nat.name
 }
 
 output "id" {
