@@ -22,7 +22,7 @@ resource "google_compute_instance" "instance" {
     subnetwork = var.gcp_instance_subnetwork
 
     dynamic "access_config" {
-      for_each = var.public_ip_acess == false ? [] : [{ "x" : "y" }]
+      for_each = var.public_ip_access == false ? [] : [{ "x" : "y" }]
       content {
 
       }
