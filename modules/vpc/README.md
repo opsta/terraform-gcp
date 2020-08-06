@@ -7,13 +7,13 @@ Module for provision VPC and subnet on Google Cloud
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12 |
-| google | >= 3.28.0 |
+| google | >= 3.32.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | >= 3.28.0 |
+| google | >= 3.32.0 |
 
 ## Inputs
 
