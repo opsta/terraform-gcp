@@ -2,7 +2,7 @@
 
 The Collection of terraform modules for GCP
 
-Link to documents by module
+## List of modules and document
 
 - [GKE (Kebernetes)](modules/gke)
 
@@ -16,4 +16,14 @@ Link to documents by module
 
 - [Firewall Rules](modules/firewall)
 
+- [VPC Peering](modules/peering)
+
+- [Cloud Router](modules/router)
+
+- [Cloud Nat](modules/nat)
+
 - Other is coming soon
+
+## Example usage for module
+
+[All Example](examples)

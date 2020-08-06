@@ -4,6 +4,18 @@ variable "name" {
   type        = string
 }
 
+variable "region" {
+  description = "The name of the Redis region of the instance."
+  type        = string
+  default     = null
+}
+
+variable "project" {
+  description = "The ID of the project in which the resource belongs. If it is not provided, the provider project is used."
+  type        = string
+  default     = null
+}
+
 variable "display_name" {
   description = "An arbitrary and optional user-provided name for the instance."
   type        = string
@@ -46,10 +58,10 @@ variable "authorized_network" {
   default     = null
 }
 
-variable "conect_mode" {
-  description = "The connection mode of the Redis instance. Possible values are: * DIRECT_PEERING * PRIVATE_SERVICE_ACCESS"
-  type        = string
-  default     = "DIRECT_PEERING"
+variable "is_private" {
+  description = "The connection mode of the Redis instance."
+  type        = bool
+  default     = true
 }
 
 variable "labels" {
@@ -70,7 +82,7 @@ variable "reserved_ip_range" {
   default     = null
 }
 
-variable "ha_mode" {
+variable "enable_ha" {
   description = "Ture if you want to enable highly available primary/replica instances"
   type        = bool
   default     = false
