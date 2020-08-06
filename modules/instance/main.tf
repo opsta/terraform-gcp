@@ -21,8 +21,11 @@ resource "google_compute_instance" "instance" {
     network    = var.gcp_instance_network
     subnetwork = var.gcp_instance_subnetwork
 
-    access_config {
-      // Ephemeral IP
+    dynamic "access_config" {
+      for_each = var.public_ip_acess == false ? [] : [{ "x" : "y" }]
+      content {
+
+      }
     }
   }
 
@@ -54,6 +57,8 @@ data "template_file" "init" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 data "template_file" "ansible_inventory" {
+  count = var.generate_ansible_inventory ? 1 : 0
+
   template = "${file("${path.module}/templates/ansible_inventory.ini")}"
   vars = {
     instance_group = var.instance_name
@@ -62,6 +67,8 @@ data "template_file" "ansible_inventory" {
 }
 
 resource "local_file" "ansible_inventory_file" {
-  content  = data.template_file.ansible_inventory.rendered
+  count = var.generate_ansible_inventory ? 1 : 0
+
+  content  = data.template_file.ansible_inventory[0].rendered
   filename = "${var.ansible_inventory_path}/${var.instance_name}.ini"
 }

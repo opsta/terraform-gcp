@@ -75,6 +75,18 @@ variable "gcp_instance_image" {
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }
 
+variable "public_ip_acess" {
+  description = "Enable acess config for instance."
+  type        = bool
+  default     = false
+}
+
+variable "generate_ansible_inventory" {
+  description = "Set to true to auto genrate inventory file for ansible."
+  type        = bool
+  default     = false
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # LINUX SSH SECTION
 # To configure Linux SSH Key
