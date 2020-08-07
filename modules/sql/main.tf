@@ -5,7 +5,7 @@ resource "random_id" "db_name_suffix" {
 resource "google_compute_global_address" "private_ip_address" {
   count = var.is_private ? 1 : 0
 
-  name          = "private-ip-address"
+  name          = "${var.name}-private-ip"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
