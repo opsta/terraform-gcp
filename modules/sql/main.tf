@@ -1,5 +1,5 @@
 resource "random_id" "db_name_suffix" {
-  byte_length = 6
+  byte_length = 4
 }
 
 resource "google_compute_global_address" "private_ip_address" {
