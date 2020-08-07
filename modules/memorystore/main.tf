@@ -17,10 +17,10 @@ resource "google_redis_instance" "redis" {
   reserved_ip_range       = var.reserved_ip_range
   tier                    = var.enable_ha ? "STANDARD_HA" : "BASIC"
 
-  depends_on = [google_service_networking_connection.private_service_connection]
+  depends_on = [google_service_networking_connection.redis_private_service_connection]
 }
 
-resource "google_compute_global_address" "service_range" {
+resource "google_compute_global_address" "redis_ip_address" {
   count = var.is_private == true ? 1 : 0
 
   name          = "${var.name}-priavte-ip"
@@ -30,10 +30,10 @@ resource "google_compute_global_address" "service_range" {
   network       = var.authorized_network
 }
 
-resource "google_service_networking_connection" "private_service_connection" {
+resource "google_service_networking_connection" "redis_private_service_connection" {
   count = var.is_private == true ? 1 : 0
 
   network                 = var.authorized_network
   service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.service_range[0].name]
+  reserved_peering_ranges = [google_compute_global_address.redis_ip_address[0].name]
 }

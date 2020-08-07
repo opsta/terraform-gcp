@@ -2,7 +2,7 @@ resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
 
-resource "google_compute_global_address" "private_ip_address" {
+resource "google_compute_global_address" "sql_ip_address" {
   count = var.is_private ? 1 : 0
 
   name          = "${var.name}-private-ip"
@@ -12,12 +12,12 @@ resource "google_compute_global_address" "private_ip_address" {
   network       = var.ip_configuration.private_network
 }
 
-resource "google_service_networking_connection" "private_vpc_connection" {
+resource "google_service_networking_connection" "sql_private_vpc_connection" {
   count = var.is_private ? 1 : 0
 
   network                 = var.ip_configuration.private_network
   service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.private_ip_address[0].name]
+  reserved_peering_ranges = [google_compute_global_address.sql_ip_address[0].name]
 }
 
 resource "google_sql_database_instance" "instance" {
@@ -108,8 +108,8 @@ resource "google_sql_database_instance" "instance" {
   # Beta - encryption_key_name
 
   depends_on = [
-    google_service_networking_connection.private_vpc_connection,
-    google_compute_global_address.private_ip_address
+    google_service_networking_connection.sql_private_vpc_connection,
+    google_compute_global_address.sql_ip_address
   ]
 }
 
