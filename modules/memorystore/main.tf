@@ -23,7 +23,7 @@ resource "google_redis_instance" "redis" {
 resource "google_compute_global_address" "service_range" {
   count = var.is_private == true ? 1 : 0
 
-  name          = var.name
+  name          = "${var.name}-priavte-ip"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
