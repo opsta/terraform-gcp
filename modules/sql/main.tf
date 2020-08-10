@@ -9,7 +9,7 @@ resource "google_compute_global_address" "sql_ip_address" {
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   address       = var.address_range == null ? null : split("/", var.address_range)[0]
-  prefix_length = var.address_range == null ? null : lenght(split("/", var.address_range)) == 1 ? null : split("/", var.address_range)[1]
+  prefix_length = var.address_range == null ? null : length(split("/", var.address_range)) == 1 ? null : split("/", var.address_range)[1]
   network       = var.ip_configuration.private_network
 }
 
