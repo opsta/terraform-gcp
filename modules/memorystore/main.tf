@@ -16,25 +16,4 @@ resource "google_redis_instance" "redis" {
   redis_version           = format("%s_%s", upper(var.database_type), upper(replace(replace(var.database_version, ".", "_"), " ", "_")))
   reserved_ip_range       = var.reserved_ip_range
   tier                    = var.enable_ha ? "STANDARD_HA" : "BASIC"
-
-  depends_on = [google_service_networking_connection.redis_private_service_connection]
-}
-
-resource "google_compute_global_address" "redis_ip_address" {
-  count = var.is_private == true ? 1 : 0
-
-  name          = "${var.name}-priavte-ip"
-  purpose       = "VPC_PEERING"
-  address_type  = "INTERNAL"
-  address       = var.address_range == null ? null : split("/", var.address_range)[0]
-  prefix_length = var.address_range == null ? 24 : length(split("/", var.address_range)) == 1 ? 24 : split("/", var.address_range)[1]
-  network       = var.authorized_network
-}
-
-resource "google_service_networking_connection" "redis_private_service_connection" {
-  count = var.is_private == true ? 1 : 0
-
-  network                 = var.authorized_network
-  service                 = "servicenetworking.googleapis.com"
-  reserved_peering_ranges = [google_compute_global_address.redis_ip_address[0].name]
 }

@@ -59,7 +59,7 @@ variable "authorized_network" {
 }
 
 variable "is_private" {
-  description = "The connection mode of the Redis instance."
+  description = "The connection mode of the Redis instance. Disable for direct connect."
   type        = bool
   default     = true
 }
@@ -86,10 +86,4 @@ variable "enable_ha" {
   description = "Ture if you want to enable highly available primary/replica instances"
   type        = bool
   default     = false
-}
-
-variable "address_range" {
-  description = "IP address or CIDR range to create Cloud SQL with this address range. Example 10.1.0.0/16 or 10.1.2.3 . Empty will auto create."
-  type        = string
-  default     = null
 }

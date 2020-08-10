@@ -25,7 +25,7 @@ Module for provision Cloud MemoryStore on Google Cloud
 | database\_version | Version of database to use in memory store service. Should relate on database\_type | `string` | `"4.0"` | no |
 | display\_name | An arbitrary and optional user-provided name for the instance. | `string` | `null` | no |
 | enable\_ha | Ture if you want to enable highly available primary/replica instances | `bool` | `false` | no |
-| is\_private | The connection mode of the Redis instance. | `bool` | `true` | no |
+| is\_private | The connection mode of the Redis instance. Disable for direct connect. | `bool` | `true` | no |
 | labels | Resource labels to represent user provided metadata. | `map(string)` | `null` | no |
 | location\_id | The zone where the instance will be provisioned. If not provided, the service will choose a zone for the instance. For STANDARD\_HA tier, instances will be created across two zones for protection against zonal failures. If [alternativeLocationId] is also provided, it must be different from [locationId]. | `string` | `null` | no |
 | memory\_size\_gb | Redis memory size in GiB. | `number` | `1` | no |
