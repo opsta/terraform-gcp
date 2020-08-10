@@ -87,3 +87,9 @@ variable "enable_ha" {
   type        = bool
   default     = false
 }
+
+variable "address_range" {
+  description = "IP address or CIDR range to create Cloud SQL with this address range. Example 10.1.0.0/16 or 10.1.2.3 . Empty will auto create."
+  type        = string
+  default     = null
+}
