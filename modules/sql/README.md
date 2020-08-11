@@ -32,7 +32,6 @@ Module for provision Cloud SQL on Google Cloud
 | disk\_size | The size of data disk, in GB. Size of a running instance cannot be reduced but can be increased. | `number` | `10` | no |
 | disk\_type | The type of data disk: PD\_SSD or PD\_HDD. | `string` | `"PD_SSD"` | no |
 | ip\_configuration | A object to configuration ip policy. document on this (https://www.terraform.io/docs/providers/google/r/sql_database_instance.html) | <pre>object({<br>    ipv4_enabled    = bool<br>    private_network = string<br>    require_ssl     = string<br>    authorized_networks = list(object({<br>      expiration_time = string<br>      name            = string<br>      value           = string<br>    }))<br>  })</pre> | `null` | no |
-| is\_private | Enable this option to true, To give private ip for instace. | `bool` | `false` | no |
 | labels | A set of key/value user label pairs to assign to the instance. | `map(string)` | `null` | no |
 | location\_preference | Document on this https://www.terraform.io/docs/providers/google/r/sql_database_instance.html | <pre>object({<br>    follow_gae_application = string<br>    zone                   = string<br>  })</pre> | `null` | no |
 | machine\_type | Type of instance to provision database | `string` | `"db-f1-micro"` | no |
