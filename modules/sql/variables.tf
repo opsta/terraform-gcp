@@ -102,12 +102,6 @@ variable "backup_start_time" {
   default     = null
 }
 
-variable "is_private" {
-  description = "Enable this option to true, To give private ip for instace."
-  type        = bool
-  default     = false
-}
-
 variable "ip_configuration" {
   description = "A object to configuration ip policy. document on this (https://www.terraform.io/docs/providers/google/r/sql_database_instance.html)"
   type = object({
