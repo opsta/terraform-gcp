@@ -6,15 +6,15 @@ Module for provision Cloud SQL on Google Cloud
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
-| google | >= 3.32.0 |
+| terraform | >= 0.13 |
+| google | >= 3.34.0 |
 | random | >= 2.2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | >= 3.32.0 |
+| google | >= 3.34.0 |
 | random | >= 2.2.0 |
 
 ## Inputs
