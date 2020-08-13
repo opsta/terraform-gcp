@@ -9,6 +9,8 @@ all:
 	echo "# Cloud SQL module\n\nModule for provision Cloud SQL on Google Cloud\n" > ./modules/sql/README.md;terraform-docs markdown ./modules/sql >> ./modules/sql/README.md
 	echo "# Network VPC module\n\nModule for provision VPC and subnet on Google Cloud\n" > ./modules/vpc/README.md;terraform-docs markdown ./modules/vpc >> ./modules/vpc/README.md
 
-# echo "# VPC module\n\nModule for provision VPC and subnet on Google Cloud\n" > ./modules/$$(TF_MODULE_NAME)/README.md;terraform-docs markdown ./modules/$$(TF_MODULE_NAME) >> ./modules/$$(TF_MODULE_NAME)/README.md
+upgrade:
+	for d in ./modules/**; do cd $${d} && terraform 0.13upgrade -yes && cd ../..; done
+
 # for d in ./modules/**; do terraform-docs markdown $${d} > $${d}/module-docs.md; done
 # for d in ./modules/**; do rm $${d}/module-docs.md; done
