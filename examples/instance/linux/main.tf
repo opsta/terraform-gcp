@@ -9,7 +9,7 @@
 provider "google" {
   # Create Service Account from this link
   # https://console.cloud.google.com/iam-admin/serviceaccounts/create
-  credentials = file("../sa-account.json")
+  credentials = file("../../gcp.json")
   project     = var.gcp_project_id
   region      = var.gcp_region
   zone        = var.gcp_zone
@@ -23,8 +23,8 @@ module "instance" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/opsta/terraform-gcp.git//modules/instance?ref=master"
-  source = "../../terraform-gcp/modules/instance"
-
+  source             = "../../../modules/instance"
+  public_ip_access   = false
   instance_name      = var.instance_name
   gcp_instance_type  = var.gcp_instance_type
   gcp_instance_tags  = var.gcp_instance_tags

@@ -13,7 +13,6 @@
 variable "gcp_project_id" {
   description = "The GCP project id"
   type        = string
-  default     = "opsta-project"
 }
 
 variable "gcp_region" {
@@ -25,7 +24,7 @@ variable "gcp_region" {
 variable "gcp_zone" {
   description = "The GCP zone in which all resources will be created"
   type        = string
-  default     = "asia-southeast1-b"
+  default     = "asia-southeast1-a"
 }
 
 variable "instance_name" {

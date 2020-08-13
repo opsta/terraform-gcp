@@ -59,7 +59,7 @@ variable "authorized_network" {
 }
 
 variable "is_private" {
-  description = "The connection mode of the Redis instance."
+  description = "The connection mode of the Redis instance. Disable for direct connect."
   type        = bool
   default     = true
 }

@@ -5,7 +5,6 @@ resource "google_compute_firewall" "firewall" {
   destination_ranges      = var.destination_ranges
   direction               = var.direction
   disabled                = var.disabled
-  enable_logging          = var.enable_logging
   priority                = var.priority
   source_ranges           = var.source_ranges
   source_service_accounts = var.source_service_accounts

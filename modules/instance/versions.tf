@@ -4,10 +4,17 @@
 # ----------------------------------------------------------------------------------------------------------------------
 
 terraform {
-  required_version = ">= 0.12"
+  required_version = ">= 0.13"
   required_providers {
     google = {
-      version = ">= 3.32.0"
+      source  = "hashicorp/google"
+      version = ">= 3.34.0"
+    }
+    local = {
+      source = "hashicorp/local"
+    }
+    template = {
+      source = "hashicorp/template"
     }
   }
 }

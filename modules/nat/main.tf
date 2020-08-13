@@ -32,5 +32,4 @@ resource "google_compute_router_nat" "nat" {
 
   region  = var.region
   project = var.project_id
-
 }
