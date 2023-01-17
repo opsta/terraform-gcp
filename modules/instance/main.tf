@@ -3,7 +3,8 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_instance" "instance" {
-  name                      = var.instance_name
+  count                     = var.gcp_instance_num
+  name                      = "${var.instance_name}-${count.index}"
   machine_type              = var.gcp_instance_type
   zone                      = var.gcp_zone
   tags                      = var.gcp_instance_tags

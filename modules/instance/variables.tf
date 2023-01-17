@@ -39,6 +39,12 @@ variable "gcp_instance_type" {
   default     = "n1-standard-2"
 }
 
+variable "gcp_instance_num" {
+  description = "GCP number of instance"
+  type        = number
+  default     = 1
+}
+
 variable "gcp_instance_tags" {
   description = "A list of network tags to attach to the instance."
   type        = list(string)
