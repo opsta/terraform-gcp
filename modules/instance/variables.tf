@@ -81,6 +81,12 @@ variable "gcp_instance_image" {
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }
 
+variable "gcp_instance_metadata_startup_script" {
+  description = "Startup Script for GCP instance"
+  type        = string
+  default     = null
+}
+
 variable "public_ip_access" {
   description = "Enable access config for instance."
   type        = bool
