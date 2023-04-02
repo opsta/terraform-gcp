@@ -40,7 +40,7 @@ resource "google_compute_instance" "instance" {
     windows-startup-script-ps1 = var.rdp_username == "" || var.rdp_password == "" ? null : data.template_file.init.rendered
   }
   
-  metadata_startup_script = var.gcp_instance_startup_script_path == null ? null : file("${path.module}/${var.gcp_instance_startup_script_path}")
+  metadata_startup_script = var.gcp_instance_startup_script_path == null ? null : file("${var.gcp_instance_startup_script_path}")
 }
 
 data "template_file" "init" {
