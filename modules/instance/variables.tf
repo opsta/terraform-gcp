@@ -81,8 +81,8 @@ variable "gcp_instance_image" {
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }
 
-variable "gcp_instance_metadata_startup_script" {
-  description = "Startup Script for GCP instance"
+variable "gcp_instance_startup_script_path" {
+  description = "Startup Script Path for GCP instance"
   type        = string
   default     = null
 }
