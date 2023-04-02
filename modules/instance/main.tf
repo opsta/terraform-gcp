@@ -39,6 +39,8 @@ resource "google_compute_instance" "instance" {
     ssh-keys                   = var.ssh_username == "" || var.ssh_public_key == "" ? null : "${var.ssh_username}:${var.ssh_public_key}"
     windows-startup-script-ps1 = var.rdp_username == "" || var.rdp_password == "" ? null : data.template_file.init.rendered
   }
+  
+  metadata_startup_script = var.gcp_instance_startup_script_path == null ? null : file("${path.module}/${var.gcp_instance_startup_script_path}")
 }
 
 data "template_file" "init" {
