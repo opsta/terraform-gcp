@@ -3,7 +3,8 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_instance" "instance" {
-  name                      = var.instance_name
+  count                     = var.gcp_instance_num
+  name                      = "${var.instance_name}-${count.index+1}"
   machine_type              = var.gcp_instance_type
   zone                      = var.gcp_zone
   tags                      = var.gcp_instance_tags
@@ -38,6 +39,8 @@ resource "google_compute_instance" "instance" {
     ssh-keys                   = var.ssh_username == "" || var.ssh_public_key == "" ? null : "${var.ssh_username}:${var.ssh_public_key}"
     windows-startup-script-ps1 = var.rdp_username == "" || var.rdp_password == "" ? null : data.template_file.init.rendered
   }
+  
+  metadata_startup_script = var.gcp_instance_startup_script_path == null ? null : file("${var.gcp_instance_startup_script_path}")
 }
 
 data "template_file" "init" {
@@ -56,19 +59,15 @@ data "template_file" "init" {
 # build the system
 # ---------------------------------------------------------------------------------------------------------------------
 
-data "template_file" "ansible_inventory" {
-  count = var.generate_ansible_inventory ? 1 : 0
-
-  template = "${file("${path.module}/templates/ansible_inventory.ini")}"
-  vars = {
-    instance_group = var.instance_name
-    instance_host  = "${var.instance_name}-server ansible_user=${var.ssh_username} ansible_host=${google_compute_instance.instance.network_interface.0.access_config.0.nat_ip} ansible_port=${var.ssh_port}"
-  }
-}
-
 resource "local_file" "ansible_inventory_file" {
   count = var.generate_ansible_inventory ? 1 : 0
 
-  content  = data.template_file.ansible_inventory[0].rendered
+  content = templatefile("${path.module}/templates/ansible_inventory.ini", {
+    instance_group = var.instance_name
+    instance_name  = var.instance_name
+    ansible_user   = var.ssh_username
+    ansible_port   = var.ssh_port
+    instance_hosts = google_compute_instance.instance
+  })
   filename = "${var.ansible_inventory_path}/${var.instance_name}.ini"
 }

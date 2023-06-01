@@ -39,6 +39,12 @@ variable "gcp_instance_type" {
   default     = "n1-standard-2"
 }
 
+variable "gcp_instance_num" {
+  description = "GCP number of instance"
+  type        = number
+  default     = 1
+}
+
 variable "gcp_instance_tags" {
   description = "A list of network tags to attach to the instance."
   type        = list(string)
@@ -73,6 +79,12 @@ variable "gcp_instance_image" {
   description = "GCP boot disk image"
   type        = string
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
+}
+
+variable "gcp_instance_startup_script_path" {
+  description = "Startup Script Path for GCP instance"
+  type        = string
+  default     = null
 }
 
 variable "public_ip_access" {
